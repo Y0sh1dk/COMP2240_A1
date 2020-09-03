@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class FileData {
     private int disp;
     private ArrayList<Job> jobs;
+    private boolean valid;
 
     FileData(int d, ArrayList<Job> j) {
         this.disp = d;

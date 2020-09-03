@@ -29,9 +29,6 @@ public class A1 {
 
         ArrayList<Job> jobs = new ArrayList<Job>(); // Create an ArrayList object
 
-
-
-
         FileData data = readJobsFromFile(p);
         int disp = data.getDisp();
         jobs = data.getJobs();
