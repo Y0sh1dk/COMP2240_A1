@@ -20,5 +20,39 @@ public class Job {
         this.priority = givenPriority;
     }
 
+    public int getArriveTime() {
+        return arriveTime;
+    }
 
+    public int getExecSize() {
+        return execSize;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setArriveTime(int arriveTime) {
+        this.arriveTime = arriveTime;
+    }
+
+    public void setExecSize(int execSize) {
+        this.execSize = execSize;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public boolean isValid() { // is valid if it has a name and a execSize
+        return !this.id.equals("") && this.execSize != 0; // return true if
+    }
 }
