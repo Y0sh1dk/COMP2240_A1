@@ -22,7 +22,6 @@ public class A1 {
 //        If given file exits, run method "run"
         A1 main = new A1();
         main.run(filePath);
-
     }
 
     private void run(Path p) throws FileNotFoundException {
