@@ -15,13 +15,14 @@ public class A1 {
         Path filePath = Paths.get(args[0]);
         System.out.println(filePath);
         if (!Files.exists(filePath)) {
-            System.out.println("File" + filePath.getFileName() + " is not found");
+            System.out.println("File " + filePath.getFileName() + " is not found");
             System.out.println("Exiting...");
             return;
         }
 //        If given file exits, run method "run"
         A1 main = new A1();
         main.run(filePath);
+
     }
 
     private void run(Path p) throws FileNotFoundException {
@@ -32,6 +33,10 @@ public class A1 {
         int disp = data.getDisp();
         jobs = data.getJobs();
         System.out.println("test");
+
+        FCFS testalgo = new FCFS(1);
+        testalgo.addJobs(jobs);
+        testalgo.run();
 
     }
 

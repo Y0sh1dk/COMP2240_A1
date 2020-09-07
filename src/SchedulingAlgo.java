@@ -1,10 +1,8 @@
 import java.util.*;
-import java.util.logging.*;
 
 public abstract class SchedulingAlgo {
 
     private String name;
-    protected Queue<Job> algoJobQueue;
     protected ArrayList<Job> allJobs;
     protected ArrayList<Job> currentJobs;
     protected ArrayList<Job> finishedJobs;
@@ -13,6 +11,10 @@ public abstract class SchedulingAlgo {
     private int currentTime;
 
     SchedulingAlgo(String givenName, int givenDispTime) {
+        this.allJobs = new ArrayList<Job>();
+        this.currentJobs = new ArrayList<Job>();
+        this.finishedJobs = new ArrayList<Job>();
+
         this.name = givenName;
         this.dispTime = givenDispTime;
         this.currentTime = 0;
@@ -44,10 +46,9 @@ public abstract class SchedulingAlgo {
     abstract void log(String message); // must be implemented in algo classes
 
     //    If a new job has arrived, add it to currentJobs
-    protected void checkArrived() {
-        int numOfJobs = this.allJobs.size();
+    protected void addArrived() {
         for (Job temp : allJobs) {
-            if (temp.getArriveTime() <= getCurrentTime()) {
+            if (temp.getArriveTime() == getCurrentTime()) {
                 currentJobs.add(temp);
             }
         }
@@ -56,6 +57,18 @@ public abstract class SchedulingAlgo {
     //    Increment current time by set amount
     protected void incCurrentTime(int t) {
         this.currentTime += t;
+    }
+
+//    Move jobs that have finished executing from currentJobs to finished Jobs
+    protected void checkFinished() {
+        //                finishedJobs.add(temp);
+        for (Job temp : currentJobs) {
+            if (temp.getRemainingExecTime() == 0) {
+                temp.setFinishTime(this.getCurrentTime());
+                finishedJobs.add(temp);
+            }
+        }
+        currentJobs.removeIf(temp -> temp.getRemainingExecTime() == 0);
     }
 
 

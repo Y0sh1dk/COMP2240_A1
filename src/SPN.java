@@ -1,17 +1,28 @@
-import java.util.logging.Logger;
+
 
 // Shortest process next
 public class SPN extends  SchedulingAlgo {
 
 
 
-    SPN(String givenName, int givenDispTime ) {
-        super(givenName, givenDispTime);
+    SPN(int givenDispTime ) {
+        super("SPN", givenDispTime);
     }
 
     @Override
     void run() {
+        log("Initialising " + this.getName() + "Algorithm...");
 
+        while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
+            this.addArrived();
+
+            this.incCurrentTime(1);
+
+        }
+//        read in new jobs
+//        do stuff
+//        record event?
+//        increment
     }
 
     @Override
