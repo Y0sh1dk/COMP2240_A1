@@ -18,12 +18,16 @@ public class FCFS extends SchedulingAlgo {
             this.checkFinished();
             this.currentJobs.sort(Job.arriveTimeComparitor());
 
+            if (jobFinished) { // run dispatcher
+                this.incCurrentTime(this.getDispTime());
+            }
+
             if (this.currentJobs.size() > 0) {
 //                Get the job at the top of the list
                 Job temp = this.currentJobs.get(0);
                 int timetemp = getCurrentTime();
 
-                this.incCurrentTime(1);
+                this.incCurrentTime(1); // time step of 1
 
                 temp.executeForTime(getCurrentTime() - timetemp);
 

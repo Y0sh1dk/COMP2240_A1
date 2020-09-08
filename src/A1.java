@@ -7,6 +7,9 @@ import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+//  TODO: Test dispatch time
+//  TODO: Generate report using a report class? method generateReport in SchedulingAlgo?
+
 public class A1 {
     public static void main(String[] args) throws FileNotFoundException {
         if (args.length != 1) { // If no args given, exit

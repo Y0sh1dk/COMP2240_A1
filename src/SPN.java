@@ -17,8 +17,9 @@ public class SPN extends SchedulingAlgo {
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
-            if (jobFinished == true) { // this should make it non-pre-emptive
+            if (jobFinished) { // this should make it non-pre-emptive
                 this.currentJobs.sort(Job.execTimeComparitor());
+                this.incCurrentTime(this.getDispTime());
             }
 
             if (this.currentJobs.size() > 0) {
