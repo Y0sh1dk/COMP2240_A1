@@ -29,6 +29,7 @@ public class SPN extends SchedulingAlgo {
 
                 if (temp.getRemainingExecTime() == 0) {
                     jobFinished = true;
+                    temp.calculateStats();
                 } else {
                     jobFinished = false;
                 }

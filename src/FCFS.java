@@ -12,6 +12,7 @@ public class FCFS extends SchedulingAlgo {
     void run() {
         log("Initialising " + this.getName() + "Algorithm...");
 
+        boolean jobFinished = true;
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
@@ -25,6 +26,13 @@ public class FCFS extends SchedulingAlgo {
                 this.incCurrentTime(1);
 
                 temp.executeForTime(getCurrentTime() - timetemp);
+
+                if (temp.getRemainingExecTime() == 0) {
+                    jobFinished = true;
+                    temp.calculateStats();
+                } else {
+                    jobFinished = false;
+                }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?

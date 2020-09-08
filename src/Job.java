@@ -8,6 +8,8 @@ public class Job {
     private int remainingExecTime;
     private int priority;
     private int finishTime;
+    private int waitingTime; // turnaroundTime - execTime;
+    private int turnaroundTime; // Arrive time - finishTime
 
     public Job() {
         this.id = "";
@@ -45,6 +47,18 @@ public class Job {
         return remainingExecTime;
     }
 
+    public int getWaitingTime() {
+        return this.waitingTime;
+    }
+
+    public int getTurnaroundTime() {
+        return turnaroundTime;
+    }
+
+    public int getFinishTime() {
+        return finishTime;
+    }
+
     public void setArriveTime(int arriveTime) {
         this.arriveTime = arriveTime;
     }
@@ -65,17 +79,27 @@ public class Job {
         this.remainingExecTime = remainingExecTime;
     }
 
+    public void setFinishTime(int finishTime) {
+        this.finishTime = finishTime;
+    }
+
+    public void setTurnaroundTime(int turnaroundTime) {
+        this.turnaroundTime = turnaroundTime;
+    }
+
+    public void setWaitingTime(int waitingTime) {
+        this.waitingTime = waitingTime;
+    }
+
     public void executeForTime(int t) {
         this.remainingExecTime -= t;
     }
 
-    public int getFinishTime() {
-        return finishTime;
+    public void calculateStats() {
+        this.turnaroundTime = this.arriveTime - this.finishTime;
+        this.waitingTime = this.turnaroundTime - this.execTime;
     }
 
-    public void setFinishTime(int finishTime) {
-        this.finishTime = finishTime;
-    }
 
     public boolean isValid() { // is valid if it has a name and a execSize
         return !this.id.equals("") && this.execTime != 0; // return true if
@@ -83,7 +107,7 @@ public class Job {
 
 
 
-//    Comparators used for sorting!!
+//    Comparators used for sorting
     static Comparator<Job> priorityComparitor() { // Highest priority first
         return new Comparator<Job>() {
             @Override
