@@ -38,6 +38,7 @@ public class SPN extends SchedulingAlgo {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
             }
         }
+        this.calcStats();
         log("finished");
     }
 

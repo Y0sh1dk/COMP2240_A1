@@ -70,6 +70,13 @@ public abstract class SchedulingAlgo {
         currentJobs.removeIf(temp -> temp.getRemainingExecTime() == 0);
     }
 
+//    Calculate stats on all jobs
+    protected void calcStats() {
+        for (Job temp : this.finishedJobs) {
+            temp.calculateStats();
+        }
+    }
+
 
     public void addJob(Job job) { // accepts a single job
         allJobs.add(job);
