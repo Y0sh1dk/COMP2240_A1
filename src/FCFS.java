@@ -15,6 +15,7 @@ public class FCFS extends SchedulingAlgo {
             this.checkFinished();
 
             if (this.currentJobs.size() > 0) {
+//                Get the job at the top of the list
                 Job temp = this.currentJobs.get(0);
                 int timetemp = getCurrentTime();
 

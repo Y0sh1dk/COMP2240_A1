@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Job {
 
     private String id;
@@ -32,7 +34,7 @@ public class Job {
     }
 
     public int getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public String getId() {
@@ -78,4 +80,54 @@ public class Job {
     public boolean isValid() { // is valid if it has a name and a execSize
         return !this.id.equals("") && this.execTime != 0; // return true if
     }
+
+
+
+//    Comparators used for sorting!!
+    static Comparator<Job> priorityComparitor() { // Highest priority first
+        return new Comparator<Job>() {
+            @Override
+            public int compare(Job j1, Job j2) {
+                if (j1.getPriority() < j2.getPriority()) {
+                    return 1;
+                } else if (j1.getPriority() == j2.getPriority()) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        };
+    }
+
+    static Comparator<Job> execTimeComparitor() { // Longest time first
+        return new Comparator<Job>() {
+            @Override
+            public int compare(Job j1, Job j2) {
+                if (j1.getExecTime() < j2.getExecTime()) {
+                    return 1;
+                } else if (j1.getExecTime() == j2.getExecTime()) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        };
+    }
+
+    static Comparator<Job> remainingTimeComparitor() { // Longest time first
+        return new Comparator<Job>() {
+            @Override
+            public int compare(Job j1, Job j2) {
+                if (j1.getRemainingExecTime() < j2.getRemainingExecTime()) {
+                    return 1;
+                } else if (j1.getRemainingExecTime() == j2.getRemainingExecTime()) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        };
+    }
+
+    
 }

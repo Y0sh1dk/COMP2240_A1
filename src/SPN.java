@@ -1,7 +1,7 @@
 
 
 // Shortest process next
-public class SPN extends  SchedulingAlgo {
+public class SPN extends SchedulingAlgo {
 
 
 
@@ -15,6 +15,8 @@ public class SPN extends  SchedulingAlgo {
 
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
+            this.checkFinished();
+            this.sortCurrentJobs();
 
             this.incCurrentTime(1);
 
@@ -30,5 +32,10 @@ public class SPN extends  SchedulingAlgo {
         System.out.println(SPN.class.getName() + ": " + message);
     }
 
+// Sort all current jobs in order of shortest execution time
+    void sortCurrentJobs() {
+        for (Job temp : currentJobs) {
 
+        }
+    }
 }

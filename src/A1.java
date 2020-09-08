@@ -2,6 +2,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,9 +35,15 @@ public class A1 {
         jobs = data.getJobs();
         System.out.println("test");
 
-        FCFS testalgo = new FCFS(1);
-        testalgo.addJobs(jobs);
-        testalgo.run();
+
+        Collections.sort(jobs, Job.priorityComparitor());
+
+        System.out.println();
+
+
+//        FCFS testalgo = new FCFS(1);
+//        testalgo.addJobs(jobs);
+//        testalgo.run();
 
     }
 
@@ -83,5 +90,4 @@ public class A1 {
         }
         return new FileData(disp, jobs);
     }
-
 }

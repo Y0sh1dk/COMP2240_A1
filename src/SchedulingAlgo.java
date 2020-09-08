@@ -33,7 +33,6 @@ public abstract class SchedulingAlgo {
     }
 
 
-
     public void setName(String n) {
         this.name = n;
     }
@@ -79,11 +78,5 @@ public abstract class SchedulingAlgo {
     public void addJobs(ArrayList<Job> j) { // accepts a whole ArrayList of jobs, overwrites all current
         this.allJobs = j;
     }
-
-
-
-
-
-
 
 }
