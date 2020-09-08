@@ -29,13 +29,7 @@ public class FCFS extends SchedulingAlgo {
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
             }
-
-
         }
-//        read in new jobs
-//        do stuff
-//        record event?
-//        increment
         log("finished");
     }
 
@@ -43,10 +37,4 @@ public class FCFS extends SchedulingAlgo {
     void log(String message) {
         System.out.println(FCFS.class.getName() + ": " + message);
     }
-
-    private void currentJobs() {
-
-    }
-
-
 }

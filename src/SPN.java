@@ -12,7 +12,7 @@ public class SPN extends SchedulingAlgo {
     @Override
     void run() {
         log("Initialising " + this.getName() + " Algorithm...");
-        
+
         boolean jobFinished = true;
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
@@ -20,7 +20,6 @@ public class SPN extends SchedulingAlgo {
             if (jobFinished == true) { // this should make it non-pre-emptive
                 this.currentJobs.sort(Job.execTimeComparitor());
             }
-
 
             if (this.currentJobs.size() > 0) {
                 Job temp = this.currentJobs.get(0); // Get job at top of list
@@ -37,13 +36,7 @@ public class SPN extends SchedulingAlgo {
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
             }
-
-
         }
-//        read in new jobs
-//        do stuff
-//        record event?
-//        increment
         log("finished");
     }
 
@@ -52,10 +45,4 @@ public class SPN extends SchedulingAlgo {
         System.out.println(SPN.class.getName() + ": " + message);
     }
 
-// Sort all current jobs in order of shortest execution time
-    void sortCurrentJobs() {
-        for (Job temp : currentJobs) {
-
-        }
-    }
 }
