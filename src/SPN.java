@@ -11,22 +11,28 @@ public class SPN extends SchedulingAlgo {
 
     @Override
     void run() {
-        log("Initialising " + this.getName() + "Algorithm...");
-
-//        Currently pre-emptive????
+        log("Initialising " + this.getName() + " Algorithm...");
+        
+        boolean jobFinished = true;
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
-            this.currentJobs.sort(Job.execTimeComparitor());
+            if (jobFinished == true) { // this should make it non-pre-emptive
+                this.currentJobs.sort(Job.execTimeComparitor());
+            }
+
 
             if (this.currentJobs.size() > 0) {
-//                Get the job at the top of the list
-                Job temp = this.currentJobs.get(0);
+                Job temp = this.currentJobs.get(0); // Get job at top of list
                 int timetemp = getCurrentTime();
-
                 this.incCurrentTime(1);
-
                 temp.executeForTime(getCurrentTime() - timetemp);
+
+                if (temp.getRemainingExecTime() == 0) {
+                    jobFinished = true;
+                } else {
+                    jobFinished = false;
+                }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?

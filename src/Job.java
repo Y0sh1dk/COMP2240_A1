@@ -104,11 +104,11 @@ public class Job {
             @Override
             public int compare(Job j1, Job j2) {
                 if (j1.getExecTime() < j2.getExecTime()) {
-                    return 1;
+                    return -1;
                 } else if (j1.getExecTime() == j2.getExecTime()) {
                     return 0;
                 } else {
-                    return -1;
+                    return 1;
                 }
             }
         };
