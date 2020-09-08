@@ -36,7 +36,7 @@ public class A1 {
         System.out.println("test");
 
 
-        Collections.sort(jobs, Job.priorityComparitor());
+        jobs.sort(Job.arriveTimeComparitor());
 
         System.out.println();
 
@@ -44,6 +44,10 @@ public class A1 {
 //        FCFS testalgo = new FCFS(1);
 //        testalgo.addJobs(jobs);
 //        testalgo.run();
+
+        SPN testalgo = new SPN(1);
+        testalgo.addJobs(jobs);
+        testalgo.run();
 
     }
 

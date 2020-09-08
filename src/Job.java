@@ -129,5 +129,20 @@ public class Job {
         };
     }
 
-    
+    static Comparator<Job> arriveTimeComparitor() { // Longest time first
+        return new Comparator<Job>() {
+            @Override
+            public int compare(Job j1, Job j2) {
+                if (j1.getArriveTime() < j2.getArriveTime()) {
+                    return -1;
+                } else if (j1.getArriveTime() == j2.getArriveTime()) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        };
+    }
+
+
 }

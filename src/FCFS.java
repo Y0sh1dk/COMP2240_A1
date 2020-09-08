@@ -1,5 +1,7 @@
 // First Come First Serve
 
+import java.util.Collections;
+
 public class FCFS extends SchedulingAlgo {
 
     FCFS(int givenDispTime ) {
@@ -13,6 +15,7 @@ public class FCFS extends SchedulingAlgo {
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
+            this.currentJobs.sort(Job.arriveTimeComparitor());
 
             if (this.currentJobs.size() > 0) {
 //                Get the job at the top of the list
@@ -25,7 +28,6 @@ public class FCFS extends SchedulingAlgo {
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
-                continue;
             }
 
 
