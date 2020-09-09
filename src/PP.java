@@ -7,7 +7,7 @@ public class PP extends SchedulingAlgo {
     }
 
     @Override
-    void run() {
+    Result run() {
         log("Initialising " + this.getName() + " Algorithm...");
 
         boolean jobFinished = true;
@@ -46,6 +46,8 @@ public class PP extends SchedulingAlgo {
         }
         this.calcStats();
         log("finished");
+
+        return new Result(eventList);
     }
 
     @Override

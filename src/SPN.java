@@ -10,10 +10,12 @@ public class SPN extends SchedulingAlgo {
     }
 
     @Override
-    void run() {
+    Result run() {
         log("Initialising " + this.getName() + " Algorithm...");
 
         boolean jobFinished = true;
+        Job runningJob;
+        Job prevRunningJob = null;
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
@@ -41,6 +43,7 @@ public class SPN extends SchedulingAlgo {
         }
         this.calcStats();
         log("finished");
+        return new Result(eventList);
     }
 
     @Override

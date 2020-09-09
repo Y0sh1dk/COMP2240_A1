@@ -9,31 +9,42 @@ public class FCFS extends SchedulingAlgo {
     }
 
     @Override
-    void run() {
+    Result run() {
         log("Initialising " + this.getName() + "Algorithm...");
 
         boolean jobFinished = true;
+        Job runningJob;
+        Job prevRunningJob = null;
+
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
             this.checkFinished();
             this.currentJobs.sort(Job.arriveTimeComparitor());
 
             if (jobFinished) { // run dispatcher
+                this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
                 this.incCurrentTime(this.getDispTime());
             }
 
             if (this.currentJobs.size() > 0) {
 //                Get the job at the top of the list
-                Job temp = this.currentJobs.get(0);
+                runningJob = this.currentJobs.get(0);
+
+                if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
+                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
+                    this.incCurrentTime(getDispTime());
+                    this.eventList.add(new Event(runningJob.getId(), this.getCurrentTime()));
+                }
+
                 int timetemp = getCurrentTime();
-
                 this.incCurrentTime(1); // time step of 1
+                runningJob.executeForTime(getCurrentTime() - timetemp);
 
-                temp.executeForTime(getCurrentTime() - timetemp);
+                prevRunningJob = runningJob;
 
-                if (temp.getRemainingExecTime() == 0) {
+                if (runningJob.getRemainingExecTime() == 0) {
                     jobFinished = true;
-                    temp.calculateStats();
+                    runningJob.calculateStats();
                 } else {
                     jobFinished = false;
                 }
@@ -44,6 +55,7 @@ public class FCFS extends SchedulingAlgo {
         }
         this.calcStats();
         log("finished");
+        return new Result(eventList);
     }
 
     @Override

@@ -1,9 +1,13 @@
-import java.util.Objects;
 
 public class Event {
     private String name;
     private int duration;
 
+
+    Event(String n, int d) {
+        this.name = n;
+        this.duration = d;
+    }
 
     public int getDuration() {
         return duration;
@@ -21,13 +25,5 @@ public class Event {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return duration == event.duration &&
-                Objects.equals(name, event.name);
-    }
 
 }

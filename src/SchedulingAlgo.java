@@ -6,6 +6,7 @@ public abstract class SchedulingAlgo {
     protected ArrayList<Job> allJobs;
     protected ArrayList<Job> currentJobs;
     protected ArrayList<Job> finishedJobs;
+    protected ArrayList<Event> eventList;
 
     private int dispTime;
     private int currentTime;
@@ -14,6 +15,7 @@ public abstract class SchedulingAlgo {
         this.allJobs = new ArrayList<Job>();
         this.currentJobs = new ArrayList<Job>();
         this.finishedJobs = new ArrayList<Job>();
+        this.eventList = new ArrayList<Event>();
 
         this.name = givenName;
         this.dispTime = givenDispTime;
@@ -32,7 +34,6 @@ public abstract class SchedulingAlgo {
         return this.currentTime;
     }
 
-
     public void setName(String n) {
         this.name = n;
     }
@@ -41,7 +42,8 @@ public abstract class SchedulingAlgo {
         return this.name;
     }
 
-    abstract void run(); // must be implemented in algo classes
+
+    abstract Result run(); // must be implemented in algo classes
     abstract void log(String message); // must be implemented in algo classes
 
     //    If a new job has arrived, add it to currentJobs
@@ -76,7 +78,6 @@ public abstract class SchedulingAlgo {
             temp.calculateStats();
         }
     }
-
 
     public void addJob(Job job) { // accepts a single job
         allJobs.add(job);

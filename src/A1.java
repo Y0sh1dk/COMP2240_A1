@@ -40,18 +40,25 @@ public class A1 {
         System.out.println("test");
 
 
-//        jobs.sort(Job.priorityComparitor());
+        FCFS algoFCFS = new FCFS(disp);
+        algoFCFS.addJobs(jobs);
+        Result resultFCFS = algoFCFS.run();
 
-        System.out.println();
+        SPN algoSPN = new SPN(disp);
+        algoSPN.addJobs(jobs);
+        Result resultSPN = algoSPN.run();
+
+        PP algoPP = new PP(disp);
+        algoPP.addJobs(jobs);
+        Result resultPP = algoPP.run();
+
+        PRR algoPRR = new PRR(disp);
+        algoPRR.addJobs(jobs);
+        Result resultPRR = algoPRR.run();
 
 
-//        FCFS testalgo = new FCFS(1);
-//        testalgo.addJobs(jobs);
-//        testalgo.run();
+//        TODO: Print results
 
-        PP testalgo = new PP(1);
-        testalgo.addJobs(jobs);
-        testalgo.run();
 
     }
 
