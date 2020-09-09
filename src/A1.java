@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 
 //  TODO: Test dispatch time
 //  TODO: Generate report using a report class? method generateReport in SchedulingAlgo?
+//  TODO: Clean up file exception stuff
 
 public class A1 {
     public static void main(String[] args) throws FileNotFoundException {
@@ -39,7 +40,7 @@ public class A1 {
         System.out.println("test");
 
 
-        jobs.sort(Job.arriveTimeComparitor());
+//        jobs.sort(Job.priorityComparitor());
 
         System.out.println();
 
@@ -48,7 +49,7 @@ public class A1 {
 //        testalgo.addJobs(jobs);
 //        testalgo.run();
 
-        SPN testalgo = new SPN(1);
+        PP testalgo = new PP(1);
         testalgo.addJobs(jobs);
         testalgo.run();
 

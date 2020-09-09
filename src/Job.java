@@ -108,16 +108,16 @@ public class Job {
 
 
 //    Comparators used for sorting
-    static Comparator<Job> priorityComparitor() { // Highest priority first
+    static Comparator<Job> priorityComparitor() { // Highest priority (lowest number) first
         return new Comparator<Job>() {
             @Override
             public int compare(Job j1, Job j2) {
                 if (j1.getPriority() < j2.getPriority()) {
-                    return 1;
+                    return -1;
                 } else if (j1.getPriority() == j2.getPriority()) {
                     return 0;
                 } else {
-                    return -1;
+                    return 1;
                 }
             }
         };
@@ -166,6 +166,17 @@ public class Job {
                 }
             }
         };
+    }
+
+    public boolean equalTo(Job j) {
+        if (j == null) {
+            return false;
+        } else if (this.id.equals(j.id) && this.arriveTime == j.arriveTime
+                && this.execTime == j.execTime && this.priority == j.priority) { // Then the jobs are the same
+            return true; // return 1 if same
+        } else {
+            return false; // return 0 if not same
+        }
     }
 
 
