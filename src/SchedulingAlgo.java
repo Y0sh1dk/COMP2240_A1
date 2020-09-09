@@ -62,7 +62,6 @@ public abstract class SchedulingAlgo {
 
 //    Move jobs that have finished executing from currentJobs to finished Jobs
     protected void checkFinished() {
-        //                finishedJobs.add(temp);
         for (Job temp : currentJobs) {
             if (temp.getRemainingExecTime() == 0) {
                 temp.setFinishTime(this.getCurrentTime());

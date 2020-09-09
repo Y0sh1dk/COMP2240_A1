@@ -96,7 +96,7 @@ public class Job {
     }
 
     public void calculateStats() {
-        this.turnaroundTime = this.arriveTime - this.finishTime;
+        this.turnaroundTime = this.finishTime - this.arriveTime;
         this.waitingTime = this.turnaroundTime - this.execTime;
     }
 

@@ -21,10 +21,10 @@ public class FCFS extends SchedulingAlgo {
             this.checkFinished();
             this.currentJobs.sort(Job.arriveTimeComparitor());
 
-            if (jobFinished) { // run dispatcher
-                this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
-                this.incCurrentTime(this.getDispTime());
-            }
+//            if (jobFinished) { // run dispatcher
+//                this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
+//                this.incCurrentTime(this.getDispTime());
+//            }
 
             if (this.currentJobs.size() > 0) {
 //                Get the job at the top of the list
@@ -33,7 +33,8 @@ public class FCFS extends SchedulingAlgo {
                 if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
                     this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
                     this.incCurrentTime(getDispTime());
-                    this.eventList.add(new Event(runningJob.getId(), this.getCurrentTime()));
+                    this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
+                    this.addArrived();
                 }
 
                 int timetemp = getCurrentTime();
@@ -44,18 +45,19 @@ public class FCFS extends SchedulingAlgo {
 
                 if (runningJob.getRemainingExecTime() == 0) {
                     jobFinished = true;
-                    runningJob.calculateStats();
+//                    runningJob.calculateStats();
                 } else {
                     jobFinished = false;
                 }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
+//                System.out.println("debug");
             }
         }
         this.calcStats();
-        log("finished");
-        return new Result(eventList);
+        log("Finished running algo...\n");
+        return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 
     @Override

@@ -47,7 +47,7 @@ public class PP extends SchedulingAlgo {
         this.calcStats();
         log("finished");
 
-        return new Result(eventList);
+        return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 
     @Override

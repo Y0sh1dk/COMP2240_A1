@@ -37,24 +37,24 @@ public class A1 {
         FileData data = readJobsFromFile(p);
         int disp = data.getDisp();
         jobs = data.getJobs();
-        System.out.println("test");
 
 
         FCFS algoFCFS = new FCFS(disp);
         algoFCFS.addJobs(jobs);
         Result resultFCFS = algoFCFS.run();
+        resultFCFS.printResult();
 
-        SPN algoSPN = new SPN(disp);
-        algoSPN.addJobs(jobs);
-        Result resultSPN = algoSPN.run();
-
-        PP algoPP = new PP(disp);
-        algoPP.addJobs(jobs);
-        Result resultPP = algoPP.run();
-
-        PRR algoPRR = new PRR(disp);
-        algoPRR.addJobs(jobs);
-        Result resultPRR = algoPRR.run();
+//        SPN algoSPN = new SPN(disp);
+//        algoSPN.addJobs(jobs);
+//        Result resultSPN = algoSPN.run();
+//
+//        PP algoPP = new PP(disp);
+//        algoPP.addJobs(jobs);
+//        Result resultPP = algoPP.run();
+//
+//        PRR algoPRR = new PRR(disp);
+//        algoPRR.addJobs(jobs);
+//        Result resultPRR = algoPRR.run();
 
 
 //        TODO: Print results
@@ -76,7 +76,7 @@ public class A1 {
 
         while (inputStream.hasNextLine()) {  // While until end of file
             String line = inputStream.nextLine();
-            System.out.println(line);
+//            System.out.println(line);
             if (line.contains("DISP: ")) {
                 String[] splitLine = line.split(" ", 2);
                 disp = Integer.parseInt(splitLine[1]);

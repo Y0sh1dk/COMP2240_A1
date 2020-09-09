@@ -1,28 +1,48 @@
 
 public class Event {
     private String name;
-    private int duration;
+    private int time;
+    private int priority;
 
 
-    Event(String n, int d) {
+    Event(String n, int p, int t) {
         this.name = n;
-        this.duration = d;
+        this.priority = p;
+        this.time = t;
     }
 
-    public int getDuration() {
-        return duration;
+    Event(String n, int t) {
+        this.name = n;
+        this.time = t;
+    }
+
+    public int getTime() {
+        return this.time;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public int getPriority() {
+        return this.priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setTime(int t) {
+        this.time = t;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "T" + this.getTime() + ": " + this.getName() + "(" + this.getPriority() +")";
     }
 
 
