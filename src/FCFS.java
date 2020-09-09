@@ -11,8 +11,6 @@ public class FCFS extends SchedulingAlgo {
     @Override
     Result run() {
         log("Initialising " + this.getName() + "Algorithm...");
-
-        boolean jobFinished = true;
         Job runningJob;
         Job prevRunningJob = null;
 
@@ -20,11 +18,6 @@ public class FCFS extends SchedulingAlgo {
             this.addArrived();
             this.checkFinished();
             this.currentJobs.sort(Job.arriveTimeComparitor());
-
-//            if (jobFinished) { // run dispatcher
-//                this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
-//                this.incCurrentTime(this.getDispTime());
-//            }
 
             if (this.currentJobs.size() > 0) {
 //                Get the job at the top of the list
@@ -34,7 +27,7 @@ public class FCFS extends SchedulingAlgo {
                     this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
                     this.incCurrentTime(getDispTime());
                     this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
-                    this.addArrived();
+                    this.addArrived(); // check arrived again because only adds if arrived on exact time
                 }
 
                 int timetemp = getCurrentTime();
@@ -42,17 +35,6 @@ public class FCFS extends SchedulingAlgo {
                 runningJob.executeForTime(getCurrentTime() - timetemp);
 
                 prevRunningJob = runningJob;
-
-                if (runningJob.getRemainingExecTime() == 0) {
-                    jobFinished = true;
-//                    runningJob.calculateStats();
-                } else {
-                    jobFinished = false;
-                }
-            }
-            else {
-//                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
-//                System.out.println("debug");
             }
         }
         this.calcStats();

@@ -21,7 +21,11 @@ public class Result {
                 System.out.println(temp.toString());
             }
         }
+        System.out.println("\nProcess Turnaround Time Waiting Time");
+        finishedJobs.sort(Job.arriveTimeComparitor()); // arrive time should sort by name, surely
+        for (Job temp : finishedJobs) {
+            System.out.println(temp.getId() + "      " + temp.getTurnaroundTime() + "              " + temp.getWaitingTime());
+        }
     }
-
 
 }
