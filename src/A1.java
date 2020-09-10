@@ -38,15 +38,16 @@ public class A1 {
         int disp = data.getDisp();
         jobs = data.getJobs();
 
+//
+//        FCFS algoFCFS = new FCFS(disp);
+//        algoFCFS.addJobs(jobs);
+//        Result resultFCFS = algoFCFS.run();
+//        resultFCFS.printResult();
 
-        FCFS algoFCFS = new FCFS(disp);
-        algoFCFS.addJobs(jobs);
-        Result resultFCFS = algoFCFS.run();
-        resultFCFS.printResult();
-
-//        SPN algoSPN = new SPN(disp);
-//        algoSPN.addJobs(jobs);
-//        Result resultSPN = algoSPN.run();
+        SPN algoSPN = new SPN(disp);
+        algoSPN.addJobs(jobs);
+        Result resultSPN = algoSPN.run();
+        resultSPN.printResult();
 //
 //        PP algoPP = new PP(disp);
 //        algoPP.addJobs(jobs);
