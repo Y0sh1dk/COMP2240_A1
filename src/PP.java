@@ -9,9 +9,6 @@ public class PP extends SchedulingAlgo {
     @Override
     Result run() {
         log("Initialising " + this.getName() + " Algorithm...");
-
-        boolean jobFinished = true;
-        boolean runDispatcher = true;
         Job runningJob;
         Job prevRunningJob = null;
 
@@ -24,7 +21,10 @@ public class PP extends SchedulingAlgo {
                 runningJob = this.currentJobs.get(0); // Get job at top of list
 
                 if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
+                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
                     this.incCurrentTime(getDispTime());
+                    this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
+                    this.addArrived(); // check arrived again because only adds if arrived on exact time
                 }
 
                 int timetemp = getCurrentTime();
@@ -32,13 +32,6 @@ public class PP extends SchedulingAlgo {
                 runningJob.executeForTime(getCurrentTime() - timetemp);
 
                 prevRunningJob = runningJob;
-
-                if (runningJob.getRemainingExecTime() == 0) {
-                    jobFinished = true;
-                    runningJob.calculateStats();
-                } else {
-                    jobFinished = false;
-                }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
@@ -54,6 +47,5 @@ public class PP extends SchedulingAlgo {
     void log(String message) {
         System.out.println(PP.class.getName() + ": " + message);
     }
-
-
+    
 }

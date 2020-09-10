@@ -44,14 +44,15 @@ public class A1 {
 //        Result resultFCFS = algoFCFS.run();
 //        resultFCFS.printResult();
 
-        SPN algoSPN = new SPN(disp);
-        algoSPN.addJobs(jobs);
-        Result resultSPN = algoSPN.run();
-        resultSPN.printResult();
+//        SPN algoSPN = new SPN(disp);
+//        algoSPN.addJobs(jobs);
+//        Result resultSPN = algoSPN.run();
+//        resultSPN.printResult();
 //
-//        PP algoPP = new PP(disp);
-//        algoPP.addJobs(jobs);
-//        Result resultPP = algoPP.run();
+        PP algoPP = new PP(disp);
+        algoPP.addJobs(jobs);
+        Result resultPP = algoPP.run();
+        resultPP.printResult();
 //
 //        PRR algoPRR = new PRR(disp);
 //        algoPRR.addJobs(jobs);
