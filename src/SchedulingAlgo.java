@@ -12,34 +12,34 @@ public abstract class SchedulingAlgo {
     private int currentTime;
 
     SchedulingAlgo(String givenName, int givenDispTime) {
-        this.allJobs = new ArrayList<Job>();
-        this.currentJobs = new ArrayList<Job>();
-        this.finishedJobs = new ArrayList<Job>();
-        this.eventList = new ArrayList<Event>();
+        allJobs = new ArrayList<Job>();
+        currentJobs = new ArrayList<Job>();
+        finishedJobs = new ArrayList<Job>();
+        eventList = new ArrayList<Event>();
 
-        this.name = givenName;
-        this.dispTime = givenDispTime;
-        this.currentTime = 0;
+        name = givenName;
+        dispTime = givenDispTime;
+        currentTime = 0;
     }
 
     protected void setDispTime(int t) {
-        this.dispTime = t;
+        dispTime = t;
     }
 
     protected int getDispTime() {
-        return this.dispTime;
+        return dispTime;
     }
 
     protected int getCurrentTime() {
-        return this.currentTime;
+        return currentTime;
     }
 
     public void setName(String n) {
-        this.name = n;
+        name = n;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
 
@@ -64,7 +64,7 @@ public abstract class SchedulingAlgo {
     protected void checkFinished() {
         for (Job temp : currentJobs) {
             if (temp.getRemainingExecTime() == 0) {
-                temp.setFinishTime(this.getCurrentTime());
+                temp.setFinishTime(getCurrentTime());
                 finishedJobs.add(temp);
             }
         }
@@ -72,16 +72,16 @@ public abstract class SchedulingAlgo {
     }
 
     protected void moveToEndOfCurrentJobs() { // moves job currently at top to the bottom
-        if (this.currentJobs.size() > 0) {
+        if (currentJobs.size() > 0) { // avoid errors if list is empty
             Job temp = this.currentJobs.get(0);
-            this.currentJobs.remove(0);
-            this.currentJobs.add(temp); // automatically adds to bottom of list
+            currentJobs.remove(0);
+            currentJobs.add(temp); // automatically adds to bottom of list
         }
     }
 
 //    Calculate stats on all jobs
     protected void calcStats() {
-        for (Job temp : this.finishedJobs) {
+        for (Job temp : finishedJobs) {
             temp.calculateStats();
         }
     }
@@ -91,7 +91,10 @@ public abstract class SchedulingAlgo {
     }
 
     public void addJobs(ArrayList<Job> j) { // accepts a whole ArrayList of jobs, overwrites all current
-        this.allJobs = j;
+//        Have to do deep copy?
+        for (Job temp : j) {
+            allJobs.add(new Job(temp.getId(), temp.getArriveTime(), temp.getExecTime(), temp.getPriority()));
+        }
     }
 
 }

@@ -5,7 +5,6 @@
 // Lower Priority Class (LPC): processes with priority 3, 4 or 5.
 // PRR algorithm is exactly same as the standard RR algorithm except each HPC process receives a time quantum of 4 units
 // and each LPC process receives a time quantum of 2 units.
-// TODO: THIS ALGO HASNT BEEN DONE!!!
 
 public class PRR extends SchedulingAlgo {
     private final int HIGHTIMEQUANT = 4;
@@ -48,12 +47,9 @@ public class PRR extends SchedulingAlgo {
                 } else {
                     currentTimeQuant = LOWTIMEQUANT;
                 }
-
-                int timetemp = getCurrentTime();
                 this.incCurrentTime(1);
-                runningJob.executeForTime(getCurrentTime() - timetemp);
+                runningJob.executeForTime(1);
                 timeRunning++;
-
                 prevRunningJob = runningJob;
 
                 if (timeRunning == currentTimeQuant) {
@@ -64,18 +60,16 @@ public class PRR extends SchedulingAlgo {
                     this.checkFinished();
                 }
                 if (runningJob.getRemainingExecTime() == 0) { // should fix some problems, nvm does not
-//                    this.moveToEndOfCurrentJobs();
                     timeRunning = 0;
                     this.checkFinished();
                 }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
-                log("do we get here?");
             }
         }
         this.calcStats();
-        log("finished");
+        log("Finished");
         return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 

@@ -31,28 +31,27 @@ public class A1 {
     }
 
     private void run(Path p) throws FileNotFoundException {
-
-        ArrayList<Job> jobs = new ArrayList<Job>(); // Create an ArrayList object
+        ArrayList<Job> jobs;
+        int disp;
 
         FileData data = readJobsFromFile(p);
-        int disp = data.getDisp();
+        disp = data.getDisp();
         jobs = data.getJobs();
 
-//
-//        FCFS algoFCFS = new FCFS(disp);
-//        algoFCFS.addJobs(jobs);
-//        Result resultFCFS = algoFCFS.run();
-//        resultFCFS.printResult();
+        FCFS algoFCFS = new FCFS(disp);
+        algoFCFS.addJobs(jobs);
+        Result resultFCFS = algoFCFS.run();
+        resultFCFS.printResult();
 
-//        SPN algoSPN = new SPN(disp);
-//        algoSPN.addJobs(jobs);
-//        Result resultSPN = algoSPN.run();
-//        resultSPN.printResult();
-//
-//        PP algoPP = new PP(disp);
-//        algoPP.addJobs(jobs);
-//        Result resultPP = algoPP.run();
-//        resultPP.printResult();
+        SPN algoSPN = new SPN(disp);
+        algoSPN.addJobs(jobs);
+        Result resultSPN = algoSPN.run();
+        resultSPN.printResult();
+
+        PP algoPP = new PP(disp);
+        algoPP.addJobs(jobs);
+        Result resultPP = algoPP.run();
+        resultPP.printResult();
 
         PRR algoPRR = new PRR(disp);
         algoPRR.addJobs(jobs);
@@ -60,9 +59,17 @@ public class A1 {
         resultPRR.printResult();
 
 
-//        TODO: Print results
+        Result[] allResults = {resultFCFS, resultPP, resultPRR, resultSPN};
+        printSummary(allResults);
 
+    }
 
+    private void printSummary(Result[] results) { // for any number of algos
+        System.out.println("Summary");
+        System.out.println("Algorithm       Average Turnaround Time   Average Waiting Time");
+        for (Result temp : results) {
+            System.out.println(temp.getAlgoName() + "    " + temp.getAvgTurnaroundTime() + "    " +  temp.getAvgWaitingTime());
+        }
     }
 
     private FileData readJobsFromFile(Path p) throws FileNotFoundException {

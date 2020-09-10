@@ -28,4 +28,24 @@ public class Result {
         }
     }
 
+    public String getAlgoName() {
+        return algoName;
+    }
+
+    public int getAvgTurnaroundTime() {
+        int avg = 0;
+        for (Job temp : finishedJobs) {
+            avg += temp.getTurnaroundTime();
+        }
+        return avg/finishedJobs.size();
+    }
+
+    public int getAvgWaitingTime() {
+        int avg = 0;
+        for (Job temp : finishedJobs) {
+            avg += temp.getWaitingTime();
+        }
+        return avg / finishedJobs.size();
+    }
+
 }
