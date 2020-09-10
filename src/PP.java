@@ -39,7 +39,6 @@ public class PP extends SchedulingAlgo {
         }
         this.calcStats();
         log("finished");
-
         return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 
@@ -47,5 +46,5 @@ public class PP extends SchedulingAlgo {
     void log(String message) {
         System.out.println(PP.class.getName() + ": " + message);
     }
-    
+
 }

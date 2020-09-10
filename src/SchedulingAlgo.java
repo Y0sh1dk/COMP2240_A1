@@ -71,6 +71,14 @@ public abstract class SchedulingAlgo {
         currentJobs.removeIf(temp -> temp.getRemainingExecTime() == 0);
     }
 
+    protected void moveToEndOfCurrentJobs() { // moves job currently at top to the bottom
+        if (this.currentJobs.size() > 0) {
+            Job temp = this.currentJobs.get(0);
+            this.currentJobs.remove(0);
+            this.currentJobs.add(temp); // automatically adds to bottom of list
+        }
+    }
+
 //    Calculate stats on all jobs
     protected void calcStats() {
         for (Job temp : this.finishedJobs) {

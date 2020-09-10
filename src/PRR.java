@@ -8,7 +8,8 @@
 // TODO: THIS ALGO HASNT BEEN DONE!!!
 
 public class PRR extends SchedulingAlgo {
-    private int timeQuantum;
+    private final int HIGHTIMEQUANT = 4;
+    private final int LOWTIMEQUANT = 2;
 
     PRR(int givenDispTime) {
         super("PRR", givenDispTime);
@@ -17,31 +18,60 @@ public class PRR extends SchedulingAlgo {
     @Override
     Result run() {
         log("Initialising " + this.getName() + " Algorithm...");
+        Job runningJob;
+        Job prevRunningJob = null;
+        int timeRunning = 0;
+        int currentTimeQuant;
+        boolean wack = false;
 
-        boolean jobFinished = true;
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
-            this.addArrived();
-            this.checkFinished();
-            if (jobFinished) { // this should make it non-pre-emptive
-                this.currentJobs.sort(Job.execTimeComparitor());
-                this.incCurrentTime(this.getDispTime());
+            if (!wack) {
+                this.addArrived();
             }
+            wack = false;
+
+            this.checkFinished();
+//            Dont need to sort?
 
             if (this.currentJobs.size() > 0) {
-                Job temp = this.currentJobs.get(0); // Get job at top of list
+                runningJob = this.currentJobs.get(0); // Get job at top of list
+
+                if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
+                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
+                    this.incCurrentTime(getDispTime());
+                    this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
+                    this.addArrived(); // check arrived again because only adds if arrived on exact time
+                }
+
+                if (runningJob.getPriority() <= 2) {
+                    currentTimeQuant = HIGHTIMEQUANT;
+                } else {
+                    currentTimeQuant = LOWTIMEQUANT;
+                }
+
                 int timetemp = getCurrentTime();
                 this.incCurrentTime(1);
-                temp.executeForTime(getCurrentTime() - timetemp);
+                runningJob.executeForTime(getCurrentTime() - timetemp);
+                timeRunning++;
 
-                if (temp.getRemainingExecTime() == 0) {
-                    jobFinished = true;
-                    temp.calculateStats();
-                } else {
-                    jobFinished = false;
+                prevRunningJob = runningJob;
+
+                if (timeRunning == currentTimeQuant) {
+                    this.addArrived();
+                    wack = true;
+                    this.moveToEndOfCurrentJobs(); // dont like this
+                    timeRunning = 0;
+                    this.checkFinished();
+                }
+                if (runningJob.getRemainingExecTime() == 0) { // should fix some problems, nvm does not
+//                    this.moveToEndOfCurrentJobs();
+                    timeRunning = 0;
+                    this.checkFinished();
                 }
             }
             else {
 //                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
+                log("do we get here?");
             }
         }
         this.calcStats();

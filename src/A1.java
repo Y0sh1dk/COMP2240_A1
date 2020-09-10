@@ -49,14 +49,15 @@ public class A1 {
 //        Result resultSPN = algoSPN.run();
 //        resultSPN.printResult();
 //
-        PP algoPP = new PP(disp);
-        algoPP.addJobs(jobs);
-        Result resultPP = algoPP.run();
-        resultPP.printResult();
-//
-//        PRR algoPRR = new PRR(disp);
-//        algoPRR.addJobs(jobs);
-//        Result resultPRR = algoPRR.run();
+//        PP algoPP = new PP(disp);
+//        algoPP.addJobs(jobs);
+//        Result resultPP = algoPP.run();
+//        resultPP.printResult();
+
+        PRR algoPRR = new PRR(disp);
+        algoPRR.addJobs(jobs);
+        Result resultPRR = algoPRR.run();
+        resultPRR.printResult();
 
 
 //        TODO: Print results
