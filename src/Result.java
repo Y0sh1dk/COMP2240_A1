@@ -32,20 +32,20 @@ public class Result {
         return algoName;
     }
 
-    public int getAvgTurnaroundTime() {
+    public float getAvgTurnaroundTime() {
         int avg = 0;
         for (Job temp : finishedJobs) {
             avg += temp.getTurnaroundTime();
         }
-        return avg/finishedJobs.size();
+        return (float)avg/finishedJobs.size();
     }
 
-    public int getAvgWaitingTime() {
+    public float getAvgWaitingTime() {
         int avg = 0;
         for (Job temp : finishedJobs) {
             avg += temp.getWaitingTime();
         }
-        return avg / finishedJobs.size();
+        return (float)avg / finishedJobs.size();
     }
 
 }

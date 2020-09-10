@@ -59,7 +59,7 @@ public class A1 {
         resultPRR.printResult();
 
 
-        Result[] allResults = {resultFCFS, resultPP, resultPRR, resultSPN};
+        Result[] allResults = {resultFCFS, resultSPN, resultPP, resultPRR};
         printSummary(allResults);
 
     }
@@ -68,7 +68,8 @@ public class A1 {
         System.out.println("Summary");
         System.out.println("Algorithm       Average Turnaround Time   Average Waiting Time");
         for (Result temp : results) {
-            System.out.println(temp.getAlgoName() + "    " + temp.getAvgTurnaroundTime() + "    " +  temp.getAvgWaitingTime());
+            System.out.println(temp.getAlgoName() + "             "
+                    + temp.getAvgTurnaroundTime() + "                       " +  temp.getAvgWaitingTime());
         }
     }
 
