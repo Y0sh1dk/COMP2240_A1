@@ -1,13 +1,11 @@
 import java.util.*;
 
-public abstract class SchedulingAlgo {
-
+public abstract class SchedulingAlgo { // Has to be extended, contains methods and vars all algos need
     private String name;
     protected ArrayList<Job> allJobs;
     protected ArrayList<Job> currentJobs;
     protected ArrayList<Job> finishedJobs;
     protected ArrayList<Event> eventList;
-
     private int dispTime;
     private int currentTime;
 
@@ -42,7 +40,6 @@ public abstract class SchedulingAlgo {
         return name;
     }
 
-
     abstract Result run(); // must be implemented in algo classes
     abstract void log(String message); // must be implemented in algo classes
 
@@ -50,7 +47,7 @@ public abstract class SchedulingAlgo {
     protected void addArrived() {
         for (Job temp : allJobs) {
             if (temp.getArriveTime() == getCurrentTime()) {
-                currentJobs.add(temp);
+                currentJobs.add(temp); // adds to end
             }
         }
     }
@@ -68,7 +65,7 @@ public abstract class SchedulingAlgo {
                 finishedJobs.add(temp);
             }
         }
-        currentJobs.removeIf(temp -> temp.getRemainingExecTime() == 0);
+        currentJobs.removeIf(temp -> temp.getRemainingExecTime() == 0); // cool java
     }
 
     protected void moveToEndOfCurrentJobs() { // moves job currently at top to the bottom
@@ -87,11 +84,11 @@ public abstract class SchedulingAlgo {
     }
 
     public void addJob(Job job) { // accepts a single job
-        allJobs.add(job);
+        allJobs.add(job); // adds to bottom
     }
 
-    public void addJobs(ArrayList<Job> j) { // accepts a whole ArrayList of jobs, overwrites all current
-//        Have to do deep copy?
+    public void addJobs(ArrayList<Job> j) { // accepts a whole ArrayList of jobs
+//        Have to do deep copy? or else all algos after first get completed jobs
         for (Job temp : j) {
             allJobs.add(new Job(temp.getId(), temp.getArriveTime(), temp.getExecTime(), temp.getPriority()));
         }

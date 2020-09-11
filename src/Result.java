@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Result {
     protected ArrayList<Event> eventList;
     protected ArrayList<Job> finishedJobs;
-    private int dispTime; // Why? idk
+    private int dispTime; // Not used currently
     private String algoName;
 
     Result(String n, int d, ArrayList<Event> eList, ArrayList<Job> jList) {
@@ -22,7 +22,7 @@ public class Result {
             }
         }
         System.out.println("\nProcess Turnaround Time Waiting Time");
-        finishedJobs.sort(Job.arriveTimeComparitor()); // arrive time should sort by name, surely
+        finishedJobs.sort(Job.arriveTimeComparitor()); // arrive time should sort by name, surely, dont want to make a name comparitor
         for (Job temp : finishedJobs) {
             System.out.println(temp.getId() + "      " + temp.getTurnaroundTime() + "              " + temp.getWaitingTime());
         }

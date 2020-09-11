@@ -1,9 +1,5 @@
 // First Come First Serve
-
-import java.util.Collections;
-
 public class FCFS extends SchedulingAlgo {
-
     FCFS(int givenDispTime ) {
         super("FCFS", givenDispTime);
     }
@@ -16,28 +12,23 @@ public class FCFS extends SchedulingAlgo {
 
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
             this.addArrived();
-            this.checkFinished();
-            this.currentJobs.sort(Job.arriveTimeComparitor());
-
+            this.checkFinished(); // remove finished jobs
+            this.currentJobs.sort(Job.arriveTimeComparitor()); // sort
             if (this.currentJobs.size() > 0) {
-//                Get the job at the top of the list
-                runningJob = this.currentJobs.get(0);
-
+                runningJob = this.currentJobs.get(0); // get job at top of list
                 if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
-                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
+                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime())); // add disp event
                     this.incCurrentTime(getDispTime());
+                    // add job event
                     this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
                     this.addArrived(); // check arrived again because only adds if arrived on exact time
                 }
-
-                int timetemp = getCurrentTime();
                 this.incCurrentTime(1); // time step of 1
-                runningJob.executeForTime(getCurrentTime() - timetemp);
-
-                prevRunningJob = runningJob;
+                runningJob.executeForTime(1);
+                prevRunningJob = runningJob; // assign current job to prev var for to compare later
             }
         }
-        this.calcStats();
+        this.calcStats(); // Calculate waiting time and turnaround time
         log("Finished running algo...\n");
         return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
@@ -46,4 +37,5 @@ public class FCFS extends SchedulingAlgo {
     void log(String message) {
         System.out.println(FCFS.class.getName() + ": " + message);
     }
+
 }

@@ -2,13 +2,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collections;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//  TODO: Test dispatch time
-//  TODO: Generate report using a report class? method generateReport in SchedulingAlgo?
 //  TODO: Clean up file exception stuff
 
 public class A1 {
@@ -19,7 +16,7 @@ public class A1 {
         }
         Path filePath = Paths.get(args[0]);
         System.out.println(filePath);
-        if (!Files.exists(filePath)) {
+        if (!Files.exists(filePath)) { // exit if file not valid
             System.out.println("File " + filePath.getFileName() + " is not found");
             System.out.println("Exiting...");
             return;
@@ -33,11 +30,12 @@ public class A1 {
     private void run(Path p) throws FileNotFoundException {
         ArrayList<Job> jobs;
         int disp;
-
+//      Extract data from file
         FileData data = readJobsFromFile(p);
         disp = data.getDisp();
         jobs = data.getJobs();
 
+//      Run algos...
         FCFS algoFCFS = new FCFS(disp);
         algoFCFS.addJobs(jobs);
         Result resultFCFS = algoFCFS.run();
@@ -58,10 +56,9 @@ public class A1 {
         Result resultPRR = algoPRR.run();
         resultPRR.printResult();
 
-
+//      Print summary
         Result[] allResults = {resultFCFS, resultSPN, resultPP, resultPRR};
         printSummary(allResults);
-
     }
 
     private void printSummary(Result[] results) { // for any number of algos
@@ -76,7 +73,7 @@ public class A1 {
     private FileData readJobsFromFile(Path p) throws FileNotFoundException {
         Scanner inputStream;
         inputStream = new Scanner (new File(String.valueOf(p.getFileName())));
-        ArrayList<Job> jobs = new ArrayList<>(); // Create an ArrayList object
+        ArrayList<Job> jobs = new ArrayList<>();
 
         int disp = 0;
         String id = null;
@@ -84,10 +81,8 @@ public class A1 {
         int execSize = -1;
         int priority = -1;
 
-
         while (inputStream.hasNextLine()) {  // While until end of file
             String line = inputStream.nextLine();
-//            System.out.println(line);
             if (line.contains("DISP: ")) {
                 String[] splitLine = line.split(" ", 2);
                 disp = Integer.parseInt(splitLine[1]);
@@ -116,4 +111,5 @@ public class A1 {
         }
         return new FileData(disp, jobs);
     }
+
 }

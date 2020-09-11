@@ -1,7 +1,6 @@
 import java.util.Comparator;
 
 public class Job {
-
     private String id;
     private int arriveTime;
     private int execTime;
@@ -100,13 +99,6 @@ public class Job {
         this.waitingTime = this.turnaroundTime - this.execTime;
     }
 
-
-    public boolean isValid() { // is valid if it has a name and a execSize
-        return !this.id.equals("") && this.execTime != 0; // return true if
-    }
-
-
-
 //    Comparators used for sorting
     static Comparator<Job> priorityComparitor() { // Highest priority (lowest number) first
         return new Comparator<Job>() {
@@ -168,7 +160,7 @@ public class Job {
         };
     }
 
-    public boolean equalTo(Job j) {
+    public boolean equalTo(Job j) { // compare two jobs
         if (j == null) {
             return false;
         } else if (this.id.equals(j.id) && this.arriveTime == j.arriveTime
@@ -178,6 +170,5 @@ public class Job {
             return false; // return 0 if not same
         }
     }
-
 
 }

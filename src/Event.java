@@ -1,9 +1,7 @@
-
 public class Event {
     private String name;
     private int time;
     private int priority;
-
 
     Event(String n, int p, int t) {
         this.name = n;
@@ -40,6 +38,7 @@ public class Event {
         this.name = name;
     }
 
+//    Used for printing the results
     @Override
     public String toString() {
         return "T" + this.getTime() + ": " + this.getName() + "(" + this.getPriority() +")";

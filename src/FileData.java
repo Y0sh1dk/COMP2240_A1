@@ -1,17 +1,14 @@
-// Only use is so can return list and a int bc java dumb
 import java.util.ArrayList;
 
-
+// Only use is so can return list and a int
 public class FileData {
     private int disp;
     private ArrayList<Job> jobs;
-    private boolean valid;
 
     FileData(int d, ArrayList<Job> j) {
         this.disp = d;
         this.jobs = j;
     }
-
 
     public int getDisp() {
         return disp;
@@ -28,4 +25,5 @@ public class FileData {
     public void setJobs(ArrayList<Job> jobs) {
         this.jobs = jobs;
     }
+
 }

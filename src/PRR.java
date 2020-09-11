@@ -1,5 +1,4 @@
 //Priority Round Robin
-
 //PRR: This is a variant of the standard Round Robin (RR) algorithm.
 // Processes are divided into two priority classes Higher Priority Class (HPC): processes with priority 0, 1 or 2 and
 // Lower Priority Class (LPC): processes with priority 3, 4 or 5.
@@ -21,27 +20,23 @@ public class PRR extends SchedulingAlgo {
         Job prevRunningJob = null;
         int timeRunning = 0;
         int currentTimeQuant;
-        boolean wack = false;
+        boolean quantFinished = false; // Messy, dont like
 
         while (this.finishedJobs.size() < this.allJobs.size()) { // Main loop
-            if (!wack) {
+            if (!quantFinished) {
                 this.addArrived();
             }
-            wack = false;
-
-            this.checkFinished();
-//            Dont need to sort?
-
+            quantFinished = false;
+            this.checkFinished(); // remove finished jobs
             if (this.currentJobs.size() > 0) {
                 runningJob = this.currentJobs.get(0); // Get job at top of list
-
                 if (!runningJob.equalTo(prevRunningJob)) { // run dispatcher if new job
-                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime()));
+                    this.eventList.add(new Event("Dispatcher", this.getCurrentTime())); // Add disp event
                     this.incCurrentTime(getDispTime());
+                    // Add job event
                     this.eventList.add(new Event(runningJob.getId(), runningJob.getPriority(), this.getCurrentTime()));
                     this.addArrived(); // check arrived again because only adds if arrived on exact time
                 }
-
                 if (runningJob.getPriority() <= 2) {
                     currentTimeQuant = HIGHTIMEQUANT;
                 } else {
@@ -51,15 +46,14 @@ public class PRR extends SchedulingAlgo {
                 runningJob.executeForTime(1);
                 timeRunning++;
                 prevRunningJob = runningJob;
-
-                if (timeRunning == currentTimeQuant) {
+                if (timeRunning == currentTimeQuant) { // dont like this
                     this.addArrived();
-                    wack = true;
-                    this.moveToEndOfCurrentJobs(); // dont like this
+                    quantFinished = true;
+                    this.moveToEndOfCurrentJobs();
                     timeRunning = 0;
                     this.checkFinished();
                 }
-                if (runningJob.getRemainingExecTime() == 0) { // should fix some problems, nvm does not
+                if (runningJob.getRemainingExecTime() == 0) { // dont like this either
                     timeRunning = 0;
                     this.checkFinished();
                 }
@@ -69,7 +63,7 @@ public class PRR extends SchedulingAlgo {
             }
         }
         this.calcStats();
-        log("Finished");
+        log("Finished running algo...\n");
         return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 
