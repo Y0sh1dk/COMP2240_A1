@@ -15,7 +15,7 @@ public class A1 {
             return;
         }
         Path filePath = Paths.get(args[0]);
-        System.out.println(filePath);
+        System.out.println("Using file: " + filePath);
         if (!Files.exists(filePath)) { // exit if file not valid
             System.out.println("File " + filePath.getFileName() + " is not found");
             System.out.println("Exiting...");
@@ -62,11 +62,11 @@ public class A1 {
     }
 
     private void printSummary(Result[] results) { // for any number of algos
-        System.out.println("Summary");
+        System.out.println("\nSummary");
         System.out.println("Algorithm       Average Turnaround Time   Average Waiting Time");
         for (Result temp : results) {
-            System.out.println(temp.getAlgoName() + "             "
-                    + temp.getAvgTurnaroundTime() + "                       " +  temp.getAvgWaitingTime());
+            System.out.println(temp.getAlgoName() + String.format("             %.2f                       %.2f"
+                    ,temp.getAvgTurnaroundTime(), temp.getAvgWaitingTime() )); // for 2dp
         }
     }
 

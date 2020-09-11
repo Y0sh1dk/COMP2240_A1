@@ -29,7 +29,7 @@ public class PP extends SchedulingAlgo {
                 prevRunningJob = runningJob;
             }
             else {
-//                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
+                this.incCurrentTime(1);
             }
         }
         this.calcStats();

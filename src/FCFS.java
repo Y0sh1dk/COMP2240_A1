@@ -27,9 +27,12 @@ public class FCFS extends SchedulingAlgo {
                 runningJob.executeForTime(1);
                 prevRunningJob = runningJob; // assign current job to prev var for to compare later
             }
+            else {
+                this.incCurrentTime(1);
+            }
         }
         this.calcStats(); // Calculate waiting time and turnaround time
-        log("Finished running algo...\n");
+        log("Finished running algo...");
         return new Result(this.getName(), this.getDispTime(), this.eventList, this.finishedJobs);
     }
 

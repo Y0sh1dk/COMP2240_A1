@@ -40,7 +40,7 @@ public class SPN extends SchedulingAlgo {
                 }
             }
             else {
-//                TODO: FIX - MAY EXIT WHEN GAP IN JOBS?
+                this.incCurrentTime(1);
             }
         }
         this.calcStats();

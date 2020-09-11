@@ -15,7 +15,7 @@ public class Result {
     }
 
     public void printResult() {
-        System.out.println(this.algoName + ":\n");
+        System.out.println(this.algoName + ":");
         for (Event temp : eventList) {
             if (!temp.getName().equals("Dispatcher")) { // if the event was not a dispatcher one
                 System.out.println(temp.toString());
@@ -24,8 +24,10 @@ public class Result {
         System.out.println("\nProcess Turnaround Time Waiting Time");
         finishedJobs.sort(Job.nameComparitor()); // sort my process name
         for (Job temp : finishedJobs) {
-            System.out.println(temp.getId() + "      " + temp.getTurnaroundTime() + "              " + temp.getWaitingTime());
+            System.out.println(temp.getId() + "      " + temp.getTurnaroundTime()
+                    + "              " + temp.getWaitingTime());
         }
+        System.out.println("\n");
     }
 
     public String getAlgoName() {
