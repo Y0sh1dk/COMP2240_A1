@@ -22,7 +22,7 @@ public class Result {
             }
         }
         System.out.println("\nProcess Turnaround Time Waiting Time");
-        finishedJobs.sort(Job.arriveTimeComparitor()); // arrive time should sort by name, surely, dont want to make a name comparitor
+        finishedJobs.sort(Job.nameComparitor()); // sort my process name
         for (Job temp : finishedJobs) {
             System.out.println(temp.getId() + "      " + temp.getTurnaroundTime() + "              " + temp.getWaitingTime());
         }

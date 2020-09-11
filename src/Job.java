@@ -160,6 +160,22 @@ public class Job {
         };
     }
 
+    static Comparator<Job> nameComparitor() { // 'lowest' process id first
+        return new Comparator<Job>() {
+            @Override
+            public int compare(Job j1, Job j2) {
+                // Compares the numbers after 'p' in the process ID
+                if (Integer.parseInt(j1.getId().substring(1)) < Integer.parseInt(j2.getId().substring(1))) {
+                    return -1;
+                } else if (j1.getId() == j2.getId()) { // Jobs should never have the same ID
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        };
+    }
+
     public boolean equalTo(Job j) { // compare two jobs
         if (j == null) {
             return false;
