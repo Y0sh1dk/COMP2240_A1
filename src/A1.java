@@ -72,7 +72,7 @@ public class A1 {
 
     private FileData readJobsFromFile(Path p) throws FileNotFoundException {
         Scanner inputStream;
-        inputStream = new Scanner (new File(String.valueOf(p.getFileName())));
+        inputStream = new Scanner (new File(String.valueOf(p.toAbsolutePath())));
         ArrayList<Job> jobs = new ArrayList<>();
 
         int disp = 0;
