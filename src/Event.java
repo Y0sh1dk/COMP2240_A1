@@ -44,5 +44,4 @@ public class Event {
         return "T" + this.getTime() + ": " + this.getName() + "(" + this.getPriority() +")";
     }
 
-
 }
